@@ -1,5 +1,6 @@
 
 import java.util.*;
+
 public class WordFrequency {
 
     int quantTotal = 0;
@@ -32,7 +33,8 @@ public class WordFrequency {
             }
         }
         System.out.println("valores: ");
-        System.out.println(cont.entrySet());
+        cont.entrySet().stream().forEach(System.out::println);
+        
        
 
     }

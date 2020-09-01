@@ -1,27 +1,69 @@
+import java.util.*;
 public class Sistema {
 
-    private String id;
-    private String tipo;
-    private double saldo;
+    ArrayList<Conta> contas = new ArrayList<Conta>();
+    int auxId;
 
-    void ContaXPTOBasic(String id) {
-        toString(id,"Conta XPTO Basic", 0 );
+
+
+    public void criarContaXPTOBasic(int id) {
+        checarId(id);
+        contas.add(new ContaXPTOBasic(id));
+     }
+    public void criarContaXPTOExtreme(int id) {
+        checarId(id);
+        contas.add(new ContaXPTOExtreme(id));
+
     }
-    void ContaXPTOExtreme(String id) {
-        toString(id,"Conta XPTO Extreme", 0 );
+    public void criarContaXPTOPlus(int id) {
+        checarId(id);
+        contas.add(new ContaXPTOPlus(id));
     }
-    void ContaXPTOPlus(String id) {
-        toString(id,"Conta XPTO Plus", 0 );
+
+    public void debitar(int id, double valor){
+        searchById(id).debitar(valor);
+
     }
+
+    public void creditar(int id, double valor){
+        searchById(id).creditar(valor);       
+        
+    }
+
+    public double consultarSaldo(int id){
+        return searchById(id).consultarSaldo();
+        
+    }
+
+    public Conta searchById(int id){
+        for(Conta c:contas){
+            if(c.getId()==id){
+                return c;
+            }
+        }
+        return null;
+    }
+
+        // Aqui teremos polimorfismos de sobrecarga 
+        private void checarId(int id) {
+            if (id > auxId) {
+                auxId = id;
+            }
     
-    public String toString(String id, String tipo, double saldo) {
-        String s = "[ ";
-        s += "Tipo: " + tipo;
-        s += "Id: " + id;
-        s += "Saldo: " + saldo;
-        s += " ]";
-        return s;
-    }
+        }
+        public void criarContaXPTOBasic() {
+            criarContaXPTOBasic(++auxId);
+        }
+        
+        public void criarContaXPTOPlus() {
+            criarContaXPTOPlus(++auxId);
+        }
+        
+        public void criarContaXPTOExtreme() {
+            criarContaXPTOExtreme(++auxId);
+        }
+    
+    
 
 }
  
