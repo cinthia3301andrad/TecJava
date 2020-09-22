@@ -5,8 +5,8 @@ import java.util.List;
 public class Composite implements Expression {
   final List<Expression> operations = new ArrayList<>();
 
-  public Composite(Expression... arithmetics) {
-      operations.addAll(Arrays.asList(arithmetics));
+  public Composite(Expression... elementos) {
+      operations.addAll(Arrays.asList(elementos));
   }
 
 
@@ -15,12 +15,12 @@ public class Composite implements Expression {
   }
 
  
-  public void addChild(Expression arithmetic) {
-      operations.add(arithmetic);
+  public void addChild(Expression elementos) {
+      operations.add(elementos);
   }
 
  
-  public void removeChild(Expression arithmetic) {
-      operations.remove(arithmetic);
+  public void removeChild(Expression elementos) {
+      operations.remove(elementos);
   }
 }

@@ -1,8 +1,9 @@
 public class Main {
     public static void main(String... args) {
-        Mult fivePlusTwo = new Mult(5, 2);
-        Div fiveMinusTwo = new Div(5, 2);
-        Composite sevenPlusThree = new Composite(fivePlusTwo, fiveMinusTwo);
-        System.out.println(sevenPlusThree.calcular());
+        Mult trestres = new Mult(3, 3);
+        Div quatrodois = new Div(4, 2);
+        Div seisdois = new Div(6, 2);
+        Composite resultado = new Composite(trestres, quatrodois, seisdois);
+        System.out.println(resultado.calcular());
     }
 }
