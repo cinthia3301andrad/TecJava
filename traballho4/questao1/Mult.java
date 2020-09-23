@@ -1,3 +1,4 @@
+package traballho4.questao1;
 public class Mult implements Expression {
   private final double x;
   private final double y;

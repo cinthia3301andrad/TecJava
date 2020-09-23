@@ -1,3 +1,4 @@
+package traballho4.questao1;
 public class Div implements Expression {
     private final double x;
     private final double y;

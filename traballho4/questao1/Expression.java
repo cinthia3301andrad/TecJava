@@ -1,4 +1,4 @@
-
+package traballho4.questao1;
 import java.util.*;
 
 public interface Expression {
