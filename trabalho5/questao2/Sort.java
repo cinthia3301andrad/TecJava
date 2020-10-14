@@ -1,46 +1,46 @@
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
-package traballho4.questao2;
-import java.util.*;
-import traballho4.questao5.RandomGaussian;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.io.PrintStream;
 
-public abstract class Sort implements RandomGaussian {
-
-    public static void main(String...aAStrings) {
-
-        LerArquivo();
-        File file = new File("random.txt"); 
-        file.delete();
-
-        
-
+public final class Sort {
+    public static void main(String[] args) throws IOException {
+        ArrayList<Double> valores = new ArrayList<>();
+        lerArquivo(valores);
     }
 
-    private static String LerArquivo() {
-        try (
-            BufferedReader bufferLer = new BufferedReader(new FileReader("random.txt"));
-
-        ) {
-            String linha = "";
-            while (true) {
-                
-                if (linha != null) {
-                    System.out.println(linha);
-                }else {
-                    break;
-                }
-                linha = bufferLer.readLine();
-                
-                
-             }
-             return linha;
-            
-        }
-        catch(IOException e) {
+    public static void lerArquivo(ArrayList<Double> valores) {
+        try (BufferedReader b = new BufferedReader(new FileReader("random.txt"));) {
+            for (String line = b.readLine(); line != null; line = b.readLine()) {
+                Double valor;
+                valor = Double.parseDouble(line.replaceAll("Generated : ", ""));
+                valores.add(valor);
+            }
+            Collections.sort(valores);
+            gravarArquivo(valores);
+            System.out.println(valores);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    
-     
-
+    public static void gravarArquivo(ArrayList<Double> valores) {
+        PrintStream p = null;
+        File arquivo = new File("random.txt");
+        try {
+            p = new PrintStream(arquivo);
+            for (int i = 0; i < 10; ++i) {
+                p.println(valores.get(i));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (p != null) {
+            p.close();
+        }
+    }
 }
