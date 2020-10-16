@@ -13,9 +13,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 
-public class Teste2 extends JFrame {
+public class InterfaceRandom extends JFrame {
 
-    public Teste2() {
+    public InterfaceRandom() {
         this.setSize(400, 400);
         final JButton meuButao = new JButton("Click para Gerar");
         meuButao.setBackground(Color.PINK);
@@ -24,51 +24,53 @@ public class Teste2 extends JFrame {
         meuButao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	jButtonActionPerformed(e);
+                jButtonActionPerformed(e);
             }
         });
         getContentPane().setLayout(null);
 
         this.getContentPane().add(meuButao);
-        
+
         JPanel panel = new JPanel();
         panel.setBounds(31, 12, 316, 299);
         getContentPane().add(panel);
         panel.setLayout(new GridLayout(10, 1));
     }
-    private void jButtonActionPerformed(ActionEvent evt) {      
-   	 ArrayList<String> valores = new ArrayList<>();
 
-       try (BufferedReader b = new BufferedReader(new FileReader("random.txt"));) {
-           for ( int i = 1; i <= 10; ++i) {
-        	   double aux = getGaussian();
-        	   
-        	   valores.add(Double.toString(aux));
-           }
-           JPanel panel = new JPanel();
-           panel.setBounds(31, 12, 316, 299);
-           getContentPane().add(panel);
-           panel.setLayout(new GridLayout(10, 1));
-           for (String i: valores) {
-        	   JLabel line = new JLabel(i);
-        	   panel.add(line);
-  
-           }
-           panel.validate();
-           Collections.sort(valores);
-           gravarArquivo(valores);
-           
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
+    private void jButtonActionPerformed(ActionEvent evt) {
+        ArrayList<String> valores = new ArrayList<>();
 
+        try (BufferedReader b = new BufferedReader(new FileReader("random.txt"));) {
+            for (int i = 1; i <= 10; ++i) {
+                double aux = getGaussian();
 
-   }
+                valores.add(Double.toString(aux));
+            }
+            JPanel panel = new JPanel();
+            panel.setBounds(31, 12, 316, 299);
+            getContentPane().add(panel);
+            panel.setLayout(new GridLayout(10, 1));
+            for (String i : valores) {
+                JLabel line = new JLabel(i);
+                panel.add(line);
+
+            }
+            panel.validate();
+            Collections.sort(valores);
+            gravarArquivo(valores);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private Random fRandom = new Random();
+
     private double getGaussian() {
-    	double aMean = 100.0f;
-    	double aVariance = 5.0f;
-        return aMean + fRandom.nextGaussian()*aVariance;
+        double aMean = 100.0f;
+        double aVariance = 5.0f;
+        return aMean + fRandom.nextGaussian() * aVariance;
     }
 
     public static void gravarArquivo(ArrayList<String> valores) {
@@ -86,10 +88,11 @@ public class Teste2 extends JFrame {
             p.close();
         }
     }
+
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Teste2().setVisible(true);
+                new InterfaceRandom().setVisible(true);
             }
         });
     }
